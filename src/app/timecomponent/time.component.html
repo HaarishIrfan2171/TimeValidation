@@ -1,0 +1,85 @@
+
+<!-- normal Ngmodel Start -->
+<!-- 
+  1.ithu normal ngmodel use pannurathu ts la object declar pannitu atha ngmodel la use pannuvom
+  2. change Event la trigger akura function kulla moment js use panni namma validation pannanum
+  3. moment js unnota project la install pannikko 
+  4. namma verum time mattum vatchu check pannuna issue akum some time
+  5. so athunala date time format ku maththitu apram moment js use panni namma condition check pannikkalam
+  6. ts la moment nu use panni irukken atha ctr+click kutuththu paththina antha plugin la functions la use panni urukka file ku pokum
+    athula read pannuna unakku understant akum
+  7.  athula isAfter, isBefore, isSame, ithu mathiri irukkum
+  8. unakku thevaiyanata use pannikko
+  9. moment('1999-04-26 01:00:00').isAfter('1999-05-26 01:00:00') return false; 26-05-1999 vita 26-04-1999 munnatiyanu check pannurom inga
+  10. moment('1999-04-26 01:00:00').isBefore('1999-05-26 01:00:00') return true; 26-05-1999 vita 26-04-1999 pinnatiyanu check pannurom inga
+  11. moment('1999-04-26 01:00:00').isSame('1999-05-26 01:00:00') return false; 26-05-1999 vita 26-04-1999 same ah nu check pannurom inga
+  12. ithe mathiri nee unakku thevaiyanathu use pannikkalam
+  13. antha date naa static ah pottu irukken 
+    fromdate = "yyyy-MM-dd" intha format la vatchukko
+    fromTime -- intha time unakku onchange la ketaikkum
+  14. dynamic ah loade pannanum na moment(`${fromdate} ${fromTime}`)
+ -->
+
+<div class="col-lg-12">
+  <label>From Time</label>
+  <div class="mt-2">
+    <input
+      class="w-30"
+      [(ngModel)]="fromTime"
+      (change)="onFromTimeChange($event)"
+      type="time"
+    />
+    <div *ngIf="fromValidation">
+      <span><b><h6 style="color: red;">To Time is Grather then From Time</h6></b></span>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <label>To Time</label>
+    <div class="mt-2">
+      <input
+        class="w-30"
+        [(ngModel)]="toTime"
+        (change)="onToTimeChange($event)"
+        type="time"
+      />
+    </div>
+  </div>
+</div>
+<!-- End -->
+
+<!-- ngModel Form Start -->
+<b>NgModel Form</b>
+<div class="col-lg-12 mt-2">
+  <form #timeForm="ngForm">
+    <label for="from_Time">From Time</label>
+    <div class="mt-2">
+      <input
+        class="w-30"
+        name="from_Time"
+        [ngModelOptions]="{standalone: false}"
+        [(ngModel)]="timeForm.from_Time"
+        (change)="from_TimeChange($event)"
+        type="time"
+      />
+      <div *ngIf="timeForm.form.get('to_Time')?.invalid">
+        <span><b><h6 style="color: red;">To Time is Grather then From Time</h6></b></span>
+      </div>
+    </div>
+  
+    <div class="mt-2">
+      <label for="to_Time">To Time</label>
+      <div class="mt-2">
+        <input
+          class="w-30"
+          name="to_Time"
+          [ngModelOptions]="{standalone: false}"
+          [(ngModel)]="timeForm.to_Time"
+          (change)="to_TimeChange($event)"
+          type="time"
+        />
+      </div>
+    </div>
+  </form>
+
+</div>
